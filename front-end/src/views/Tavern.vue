@@ -10,9 +10,9 @@
         <br />
         <input type="text" v-model="characterRace" placeholder="Race" />
         <div>
-          <input v-model="findUsername" placeholder="Search" />
-          <div class="suggestions" v-if="suggestions.length > 0">
-            <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectUser(s)">
+          <input v-model="findUsername" placeholder="User" />
+          <div class="suggestions" v-if="users.length > 0">
+            <div class="suggestion" v-for="s in users" :key="s.id" @click="selectUser(s)">
               {{ s.username }}
             </div>
           </div>
@@ -58,12 +58,6 @@ export default {
     user() {
       return this.$root.$data.user;
     },
-    suggestions() {
-      let users = this.users.filter((user) =>
-        user.username.toLowerCase().startsWith(this.findUsername.toLowerCase())
-      );
-      return users.sort((a, b) => a.username > b.username);
-    },
   },
   methods: {
     async addCharacter() {
@@ -94,7 +88,7 @@ export default {
       }
     },
     selectUser(user) {
-      this.findUsername = "";
+      this.findUsername = user.username;
       this.findUser = user;
     },
   },
