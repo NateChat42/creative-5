@@ -1,6 +1,7 @@
 <template>
 <div>
   <!-- <Admin v-if="user && user.role === 'admin'" /> -->
+  <!-- <HomePage v-else-if="user"/> -->
   <HomePage v-if="user" />
   <Login v-else />
 </div>
