@@ -25,7 +25,8 @@
       <br />
     </div>
     <div v-else>
-      <a href="localhost:8080">Go to the homepage</a>
+      <h3>You have been logged out.</h3>
+      <router-link to="/">Return to login screen</router-link>
     </div>
   </div>
 </template>

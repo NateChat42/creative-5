@@ -69,11 +69,11 @@ app.get('/api/characters', async (req, res) => {
   let characters = [];
   try {
     if (req.user.role === "admin") {
-      characters = await Character.find().sort();
+      characters = await Character.find();
     } else {
       characters = await Character.find({
         user: req.user
-      }).sort();
+      });
     }
     return res.send({
       characters: characters
