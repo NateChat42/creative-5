@@ -109,7 +109,7 @@ export default {
       try {
         const response = await axios.get("/api/characters");
         // console.log(response);
-        this.characters = response.data;
+        this.characters = response.data.characters;
       } catch (error) {
         // console.log(error);
       }

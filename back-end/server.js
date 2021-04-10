@@ -65,16 +65,12 @@ app.post('/api/characters', validUser, async (req, res) => {
   }
 });
 
-app.get('/api/characters', async (req, res) => {
+app.get('/api/characters', validUser, async (req, res) => {
   let characters = [];
   try {
-    if (req.user.role === "admin") {
-      characters = await Character.find();
-    } else {
-      characters = await Character.find({
-        user: req.user
-      });
-    }
+    characters = await Character.find({
+      user: req.user
+    }).populate('user');
     return res.send({
       characters: characters
     });
