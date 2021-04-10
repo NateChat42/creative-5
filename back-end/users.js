@@ -4,7 +4,6 @@ const argon2 = require("argon2");
 
 const router = express.Router();
 
-
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
@@ -178,6 +177,23 @@ userSchema.methods.comparePassword = async function(password) {
       return res.sendStatus(500);
     }
   });
+
+  // allow admin to get all users
+  router.get('/users', validUser, async (req, res) => {
+    let users = []
+    try {
+      if (req.user.role === "admin") {
+        users = await User.find().sort();
+      } 
+      return res.send({
+        users: users
+      });
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(500);
+    }
+  });
+
   
   // logout
   router.delete("/", validUser, async (req, res) => {

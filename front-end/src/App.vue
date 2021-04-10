@@ -4,7 +4,7 @@
       <router-link to="/tavern" v-if="user.role === 'admin'">
         <h2>Create Characters</h2>
       </router-link>
-      <router-link to="/">
+      <router-link to="/" v-if="user.role === 'admin'">
         <h2>Manage Character Quests</h2>
       </router-link>
       <button><a @click="logout">Logout</a></button>
