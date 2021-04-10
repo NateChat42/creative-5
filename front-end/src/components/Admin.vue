@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <h1 class="header" v-show="characters.length === 0">
       You have no characters! Try making some.
     </h1>
@@ -13,7 +13,8 @@
         {{ character.name }}
       </button>
     </div>
-    <div class="form" v-if="character">
+    <div class="form" v-if="character"> 
+      <h4>Character belongs to User: {{this.characterUsername}}</h4>
       <h4>Name:</h4>
       <input v-model="characterName" />
       <p></p>
@@ -23,12 +24,20 @@
       <h4>Race:</h4>
       <input v-model="characterRace" />
       <p></p>
+      <div class="buttons">
+        <button v-if="character" @click="editCharacter(character)">
+          Edit Character
+        </button>
+        <button v-if="character" @click="deleteCharacter(character)">
+          Delete Character
+        </button>
+      </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "Admin",
   data() {
@@ -38,6 +47,7 @@ export default {
       characterName: "",
       characterRace: "",
       characterClass: "",
+      characterUsername: "",
       color: "#0F0",
       quests: [],
       title: "",
@@ -49,13 +59,12 @@ export default {
   created() {
     this.getCharacters();
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     async getCharacters() {
       try {
-        const response = await axios.get("/api/characters");
-        // console.log(response);
+        const response = await axios.get("/api/admin/characters");
+        console.log(response);
         this.characters = response.data.characters;
       } catch (error) {
         // console.log(error);
@@ -66,7 +75,7 @@ export default {
       this.characterName = character.name;
       this.characterRace = character.race;
       this.characterClass = character.class;
-      this.getQuests();
+      this.characterUsername = character.user;
     },
     async editCharacter(character) {
       try {
@@ -95,7 +104,10 @@ export default {
       } catch (error) {
         // console.log(error);
       }
-    },    
+    },
+    active(character) {
+      return this.character && character._id === this.character._id;
+    },
   },
 };
 </script>
@@ -174,6 +186,4 @@ button.selected {
 .controls {
   margin-top: 20px;
 }
-
-
 </style>

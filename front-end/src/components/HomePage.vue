@@ -14,25 +14,6 @@
         {{ character.name }}
       </button>
     </div>
-    <!-- <div class="form" v-if="character">
-      <h4>Name:</h4>
-      <input v-model="characterName" />
-      <p></p>
-      <h4>Class:</h4>
-      <input v-model="characterClass" />
-      <p></p>
-      <h4>Race:</h4>
-      <input v-model="characterRace" />
-      <p></p>
-    </div>
-    <div class="buttons">
-      <button v-if="character" @click="editCharacter(character)">
-        Edit Character
-      </button>
-      <button v-if="character" @click="deleteCharacter(character)">
-        Delete Character
-      </button>
-    </div> -->
     <h1 v-if="character">Manage {{ character.name }}'s Quests</h1>
     <div class="todoQuests" v-if="character">
       <p v-show="activeQuests.length === 0">
@@ -121,34 +102,6 @@ export default {
       this.characterClass = character.class;
       this.getQuests();
     },
-    // async editCharacter(character) {
-    //   try {
-    //     await axios.put("/api/characters/" + character._id, {
-    //       name: this.characterName,
-    //       class: this.characterClass,
-    //       race: this.characterRace,
-    //     });
-    //     this.character = null;
-    //     this.characterName = "";
-    //     this.characterRace = "";
-    //     this.characterClass = "";
-    //     this.getCharacters();
-    //   } catch (error) {
-    //     // console.log(error);
-    //   }
-    // },
-    // async deleteCharacter(character) {
-    //   try {
-    //     await axios.delete(`/api/characters/${character._id}`);
-    //     this.character = null;
-    //     this.characterName = "";
-    //     this.characterRace = "";
-    //     this.characterClass = "";
-    //     this.getCharacters();
-    //   } catch (error) {
-    //     // console.log(error);
-    //   }
-    // },
     async getQuests() {
       try {
         const response = await axios.get(
