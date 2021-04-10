@@ -88,7 +88,7 @@ export default {
     async getUsers() {
       try {
         let users = await axios.get("api/users/users");
-        this.users = users.data;
+        this.users = users.data.users;
       } catch (error) {
         // console.log(error);
       }
@@ -108,5 +108,14 @@ button {
   background-color: white;
   color: #1c03ac;
   padding: 5px 10px;
+}
+
+.suggestions {
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+.suggestion {
+  min-height: 20px;
 }
 </style>
