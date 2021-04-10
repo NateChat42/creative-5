@@ -16,6 +16,8 @@
     </div>
     <h1 v-if="character">Manage {{ character.name }}'s Quests</h1>
     <div class="todoQuests" v-if="character">
+      <h2>Class: {{ this.characterClass }}</h2>
+      <h2>Race: {{ this.characterRace }}</h2>
       <p v-show="activeQuests.length === 0">
         You are done with all of {{ character.name }}'s quests! Good job!
       </p>
@@ -46,7 +48,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "HomePage",
   data() {

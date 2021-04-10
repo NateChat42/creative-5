@@ -64,7 +64,7 @@ export default {
     async getCharacters() {
       try {
         const response = await axios.get("/api/admin/characters");
-        console.log(response);
+        // console.log(response);
         this.characters = response.data.characters;
       } catch (error) {
         // console.log(error);
@@ -75,7 +75,7 @@ export default {
       this.characterName = character.name;
       this.characterRace = character.race;
       this.characterClass = character.class;
-      this.characterUsername = character.user;
+      this.getUsername(character.user);
     },
     async editCharacter(character) {
       try {
@@ -104,6 +104,15 @@ export default {
       } catch (error) {
         // console.log(error);
       }
+    },
+    async getUsername(userID) {
+        try {
+            let response = await axios.get(`/api/users/users/${userID}`);
+            this.characterUsername = response.data.username;
+        }
+        catch (error) {
+            // console.log(error);
+        }
     },
     active(character) {
       return this.character && character._id === this.character._id;

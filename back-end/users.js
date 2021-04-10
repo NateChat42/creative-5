@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
       this.password = hash;
       next();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       next(error);
     }
   });
@@ -123,7 +123,7 @@ userSchema.methods.comparePassword = async function(password) {
         user: user
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.sendStatus(500);
     }
   });
@@ -161,7 +161,7 @@ userSchema.methods.comparePassword = async function(password) {
       });
   
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.sendStatus(500);
     }
   });
@@ -173,7 +173,7 @@ userSchema.methods.comparePassword = async function(password) {
         user: req.user
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.sendStatus(500);
     }
   });
@@ -191,7 +191,26 @@ userSchema.methods.comparePassword = async function(password) {
         users: users
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      return res.sendStatus(500);
+    }
+  });
+
+   // allow admin to get one users
+   router.get('/users/:id', validUser, async (req, res) => {
+    let user = null;
+    try {
+      if (req.user.role === "admin") {
+        user = await User.findOne({_id: req.params.id});
+      } 
+      if (!user) {
+        res.send(404);
+      }
+      return res.send({
+        username: user.username
+      });
+    } catch (error) {
+      // console.log(error);
       return res.sendStatus(500);
     }
   });
@@ -203,7 +222,7 @@ userSchema.methods.comparePassword = async function(password) {
       req.session = null;
       res.sendStatus(200);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.sendStatus(500);
     }
   });

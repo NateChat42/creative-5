@@ -78,12 +78,6 @@ app.get('/api/characters', validUser, async (req, res) => {
     console.log(error);
     return res.sendStatus(500);
   }
-  //   let characters = await Character.find();
-  //   res.send(characters);
-  // } catch (error) {
-  //   console.log(error);
-  //   res.sendStatus(500);
-  // }
 });
 
 app.get('/api/admin/characters', validUser, async (req, res) => {
@@ -93,17 +87,12 @@ app.get('/api/admin/characters', validUser, async (req, res) => {
     characters = await Character.find();
     return res.send({
       characters: characters
+      
     });
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
   }
-  //   let characters = await Character.find();
-  //   res.send(characters);
-  // } catch (error) {
-  //   console.log(error);
-  //   res.sendStatus(500);
-  // }
 });
 
 app.put('/api/characters/:characterID', async (req, res) => {
