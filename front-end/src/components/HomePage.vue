@@ -14,7 +14,7 @@
         {{ character.name }}
       </button>
     </div>
-    <div class="form" v-if="character">
+    <!-- <div class="form" v-if="character">
       <h4>Name:</h4>
       <input v-model="characterName" />
       <p></p>
@@ -32,11 +32,11 @@
       <button v-if="character" @click="deleteCharacter(character)">
         Delete Character
       </button>
-    </div>
+    </div> -->
     <h1 v-if="character">Manage {{ character.name }}'s Quests</h1>
     <div class="todoQuests" v-if="character">
       <p v-show="activeQuests.length === 0">
-        You are done with all your quests! Good job!
+        You are done with all of {{ character.name }}'s quests! Good job!
       </p>
       <form @submit.prevent="addQuest">
         <input type="text" v-model="title" placeholder="Title" />
@@ -121,34 +121,34 @@ export default {
       this.characterClass = character.class;
       this.getQuests();
     },
-    async editCharacter(character) {
-      try {
-        await axios.put("/api/characters/" + character._id, {
-          name: this.characterName,
-          class: this.characterClass,
-          race: this.characterRace,
-        });
-        this.character = null;
-        this.characterName = "";
-        this.characterRace = "";
-        this.characterClass = "";
-        this.getCharacters();
-      } catch (error) {
-        // console.log(error);
-      }
-    },
-    async deleteCharacter(character) {
-      try {
-        await axios.delete(`/api/characters/${character._id}`);
-        this.character = null;
-        this.characterName = "";
-        this.characterRace = "";
-        this.characterClass = "";
-        this.getCharacters();
-      } catch (error) {
-        // console.log(error);
-      }
-    },
+    // async editCharacter(character) {
+    //   try {
+    //     await axios.put("/api/characters/" + character._id, {
+    //       name: this.characterName,
+    //       class: this.characterClass,
+    //       race: this.characterRace,
+    //     });
+    //     this.character = null;
+    //     this.characterName = "";
+    //     this.characterRace = "";
+    //     this.characterClass = "";
+    //     this.getCharacters();
+    //   } catch (error) {
+    //     // console.log(error);
+    //   }
+    // },
+    // async deleteCharacter(character) {
+    //   try {
+    //     await axios.delete(`/api/characters/${character._id}`);
+    //     this.character = null;
+    //     this.characterName = "";
+    //     this.characterRace = "";
+    //     this.characterClass = "";
+    //     this.getCharacters();
+    //   } catch (error) {
+    //     // console.log(error);
+    //   }
+    // },
     async getQuests() {
       try {
         const response = await axios.get(

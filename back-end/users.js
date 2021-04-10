@@ -183,7 +183,9 @@ userSchema.methods.comparePassword = async function(password) {
     let users = []
     try {
       if (req.user.role === "admin") {
-        users = await User.find().sort();
+        users = await User.find({
+          role: ""
+        }).sort();
       } 
       return res.send({
         users: users

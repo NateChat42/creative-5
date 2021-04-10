@@ -1,8 +1,8 @@
 <template>
 <div>
-  <!-- <Admin v-if="user && user.role === 'admin'" /> -->
-  <!-- <HomePage v-else-if="user"/> -->
-  <HomePage v-if="user" />
+  <Admin v-if="user && user.role === 'admin'" />
+  <HomePage v-else-if="user"/>
+  <!-- <HomePage v-if="user" /> -->
   <Login v-else />
 </div>
 </template>
@@ -10,14 +10,14 @@
 <script>
 import HomePage from '@/components/HomePage.vue'
 import Login from '@/components/Login.vue'
-// import Admin from '@/components/Admin.vue'
+import Admin from '@/components/Admin.vue'
 import axios from 'axios'
 export default {
   name: 'Home',
   components: {
     HomePage,
     Login,
-    // Admin,
+    Admin,
   },
   async created() {
     try {
