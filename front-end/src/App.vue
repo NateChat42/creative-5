@@ -1,16 +1,39 @@
 <template>
   <div id="app">
-    <div id="menu">
-      <router-link to="/tavern">
+    <div id="menu" v-if="user">
+      <router-link to="/tavern" v-if="user.role === 'admin'">
         <h2>Create Characters</h2>
       </router-link>
       <router-link to="/">
         <h2>Manage Character Quests</h2>
       </router-link>
+      <button><a @click="logout">Logout</a></button>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+import axios from "axios";
+export default {
+  name: "Home",
+  methods: {
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    },
+  },
+};
+</script>
 
 <style>
 * {
